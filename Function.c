@@ -184,7 +184,7 @@ void DeleteMenu() {
 			}
 		} while (select < 1 || select>7);
 		if (select < 7) {
-			printf("Enther the name of product you wont sell.\n");
+			printf("Enther the name of product you wont delite.\n");
 			scanf(" %29s", &nameOfDeleteItem);
 			printf("Enter the id of that item.\n");
 			scanf(" %d", &idOfDeleteItem);
@@ -479,6 +479,7 @@ void CreatingFiles() {
 	}
 }
 
+//entering the Products by their type in werhouse 
 void EnterTheProductType1(char FileName[30]) {
 	//type 1 product 
 	int temp = -1;
@@ -1049,6 +1050,7 @@ int SellProcesorsAndMatherboard(char* nameOfSearchItem, int idOfSearchItem, char
 	int sellQuantity=0;
 	FILE* file = NULL;
 	int temp = *(counter);
+	int flag = 0;
 	if((strcmp("Procesor.bin",fileName))==0){
 		PRODUCT_TYPE1* Procesor = NULL;
 		Procesor = GetingProductType1(Procesor, counter, "Procesor.bin");
@@ -1058,6 +1060,7 @@ int SellProcesorsAndMatherboard(char* nameOfSearchItem, int idOfSearchItem, char
 		}
 		for (int i = 0; i < *(counter); i++) {
 			if ((strcmp((Procesor + i)->name, nameOfSearchItem) == 0) && (Procesor + i)->id == idOfSearchItem) {
+				flag = 1;
 				printf("Item is found.\n");
 				printf("\nName of procesor:%s\nSoket of procesor:%s\nPrice of procesor:%f\nQuantity:%d\nId of product:%d\n",
 					(Procesor + i)->name,
@@ -1078,6 +1081,11 @@ int SellProcesorsAndMatherboard(char* nameOfSearchItem, int idOfSearchItem, char
 					break;
 				}
 			}
+		}
+		if (flag == 0)
+		{
+			free(Procesor);
+			return -1;
 		}
 		//entering new value of quantity in the file 
 		remove("Procesor.bin");
@@ -1107,6 +1115,7 @@ int SellProcesorsAndMatherboard(char* nameOfSearchItem, int idOfSearchItem, char
 		}
 		for (int i = 0; i < *(counter); i++) {
 			if ((strcmp((Matherboard + i)->name, nameOfSearchItem) == 0) && (Matherboard + i)->id == idOfSearchItem) {
+				flag = 1;
 				printf("Item is found.\n");
 				printf("\nName of Matherboard:%s\nSoket of Matherboard:%s\nPrice of Matherboard:%f\nQuantity:%d\nId of product:%d\n",
 					(Matherboard + i)->name,
@@ -1127,6 +1136,11 @@ int SellProcesorsAndMatherboard(char* nameOfSearchItem, int idOfSearchItem, char
 					break;
 				}
 			}
+		}
+		if (flag == 0)
+		{
+			free(Matherboard);
+			return -1;
 		}
 		//entering new value of quantity in the file 
 		remove("Matherboard.bin");
@@ -1154,6 +1168,7 @@ int SellGraphichCardAndRAM(char* nameOfSearchItem, int idOfSearchItem, char* fil
 	int sellQuantity = 0;
 	FILE* file = NULL;
 	int temp = *(counter);
+	int flag = 0;
 	if ((strcmp("GraphichCard.bin", fileName)) == 0) {
 		PRODUCT_TYPE2* GraphichCard = NULL;
 		GraphichCard = GetingProductType2(GraphichCard, counter, "GraphichCard.bin");
@@ -1163,6 +1178,7 @@ int SellGraphichCardAndRAM(char* nameOfSearchItem, int idOfSearchItem, char* fil
 		}
 		for (int i = 0; i < *(counter); i++) {
 			if ((strcmp((GraphichCard + i)->name, nameOfSearchItem) == 0) && (GraphichCard + i)->id == idOfSearchItem) {
+				flag = 1;
 				printf("\nItem is found.\n");
 				printf("Name of GraphichCard:%s\nType of GraphichCard:%s\n VRAM:%d\nPrice of GraphichCard:%f\nQuantity:%d\nId of product:%d\n",
 					(GraphichCard + i)->name,
@@ -1184,6 +1200,10 @@ int SellGraphichCardAndRAM(char* nameOfSearchItem, int idOfSearchItem, char* fil
 					break;
 				}
 			}
+		}
+		if (flag == 0) {
+			free(GraphichCard);
+			return -1;
 		}
 		//entering new value of quantity in the file 
 		remove("GraphichCard.bin");
@@ -1213,6 +1233,7 @@ int SellGraphichCardAndRAM(char* nameOfSearchItem, int idOfSearchItem, char* fil
 		}
 		for (int i = 0; i < *(counter); i++) {
 			if ((strcmp((RAM + i)->name, nameOfSearchItem) == 0) && (RAM + i)->id == idOfSearchItem) {
+				flag = 1;
 				printf("\nItem is found.\n");
 				printf("Name of RAM:%s\nType of RAM:%s\n Gb of RAM memory:%d\nPrice of RAM:%f\nQuantity:%d\nId of product:%d\n",
 					(RAM + i)->name,
@@ -1234,6 +1255,10 @@ int SellGraphichCardAndRAM(char* nameOfSearchItem, int idOfSearchItem, char* fil
 					break;
 				}
 			}
+		}
+		if (flag == 0) {
+			free(RAM);
+			return -1;
 		}
 		//entering new value of quantity in the file 
 		remove("RAM.bin");
@@ -1261,6 +1286,7 @@ int SellCaseAndColer(char* nameOfSearchItem, int idOfSearchItem, char* fileName,
 	int sellQuantity = 0;
 	FILE* file = NULL;
 	int temp = *(counter);
+	int flag = 0;
 	if ((strcmp("Chase.bin", fileName)) == 0) {
 		PRODUCT_TYPE3* Chase = NULL;
 		Chase = GetingProductType3(Chase, counter, "Chase.bin");
@@ -1270,6 +1296,7 @@ int SellCaseAndColer(char* nameOfSearchItem, int idOfSearchItem, char* fileName,
 		}
 		for (int i = 0; i < *(counter); i++) {
 			if ((strcmp((Chase + i)->name, nameOfSearchItem) == 0) && (Chase + i)->id == idOfSearchItem) {
+				flag = 1;
 				printf("\nItem is found.\n");
 				printf("\nName of Chase:%s\nType of Chase:%s\nPrice of Chase:%f\nQuantity:%d\nId of product:%d\n",
 					(Chase + i)->name,
@@ -1290,6 +1317,10 @@ int SellCaseAndColer(char* nameOfSearchItem, int idOfSearchItem, char* fileName,
 					break;
 				}
 			}
+		}
+		if (flag == 0) {
+			free(Chase);
+			return -1;
 		}
 		//entering new value of quantity in the file 
 		remove("Chase.bin");
@@ -1319,6 +1350,7 @@ int SellCaseAndColer(char* nameOfSearchItem, int idOfSearchItem, char* fileName,
 		}
 		for (int i = 0; i < *(counter); i++) {
 			if ((strcmp((Cooler + i)->name, nameOfSearchItem) == 0) && (Cooler + i)->id == idOfSearchItem) {
+				flag = 1;
 				printf("\nItem is found.\n");
 				printf("\nName of Cooler:%s\nType of Cooler:%s\nPrice of Cooler:%f\nQuantity:%d\nId of product:%d\n",
 					(Cooler + i)->name,
@@ -1339,6 +1371,10 @@ int SellCaseAndColer(char* nameOfSearchItem, int idOfSearchItem, char* fileName,
 					break;
 				}
 			}
+		}
+		if (flag == 0) {
+			free(Cooler);
+			return -1;
 		}
 		//entering new value of quantity in the file 
 		remove("Cooler.bin");
@@ -1378,6 +1414,7 @@ int DeliteProcesors(char* nameOfItem, int idOfItem, char* fileName, int* counter
 	}
 	for (int i = 0; i < *(counter); i++) {
 		if ((strcmp((Procesor + i)->name, nameOfItem) == 0) && (Procesor + i)->id == idOfItem) {
+			(Procesor + i)->id++;
 			flag = 1;
 		}
 		//updating id becouse one item will be less in sistem
@@ -1432,6 +1469,7 @@ int DeliteMatherboard(char* nameOfItem, int idOfItem, char* fileName, int* count
 	}
 	for (int i = 0; i < *(counter); i++) {
 		if ((strcmp((Matherboard + i)->name, nameOfItem) == 0) && (Matherboard + i)->id == idOfItem) {
+			(Matherboard + i)->id++;
 			flag = 1;
 		}
 		//updating id becouse one item will be less in sistem
@@ -1487,6 +1525,7 @@ int DeliteRAMORGraphicCard(char* nameOfItem, int idOfItem, char* fileName, int* 
 	}
 	for (int i = 0; i < *(counter); i++) {
 		if ((strcmp((Product + i)->name, nameOfItem) == 0) && (Product + i)->id == idOfItem) {
+			(Product + i)->id++;
 			flag = 1;
 		}
 		//updating id becouse one item will be less in sistem
@@ -1542,6 +1581,7 @@ int DeliteChaseOrColer(char* nameOfItem, int idOfItem, char* fileName, int* coun
 	}
 	for (int i = 0; i < *(counter); i++) {
 		if ((strcmp((Product + i)->name, nameOfItem) == 0) && (Product + i)->id == idOfItem) {
+			(Product + i)->id++;
 			flag = 1;
 		}
 		//updating id becouse one item will be less in sistem
@@ -1581,4 +1621,4 @@ int DeliteChaseOrColer(char* nameOfItem, int idOfItem, char* fileName, int* coun
 	fclose(file);
 	free(Product);
 	return 1;
-}
+} 
